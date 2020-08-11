@@ -5,7 +5,7 @@ h1 {
 
     text-transform: uppercase;
     font-weight: 200;
-    font-size: 65px;
+    font-size: 50px;
     border-top: 5px solid;
 }
 
@@ -17,7 +17,7 @@ body{
     font-weight: 200;
 }
 img{
-    height: 450px;
+    height: 400px;
     border-radius: 50%; 
 }
 #container {
