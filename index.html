@@ -1,24 +1,69 @@
-<!-- Write your HTML in here -->
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-	<title>My Cat MIssy</title>
-	<link rel="stylesheet" href="app.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Voice Spectrum Demo</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 5px;
+      background-color: #f0f8ff;
+    }
+
+    h1 {
+      color: #00509e;
+    }
+
+    p {
+      font-size: 18px;
+      color: #333;
+    }
+
+    strong {
+      color: #d62828;
+    }
+
+    button {
+      margin: 10px;
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #023e8a;
+    }
+
+    #status {
+      margin-top: 20px;
+      font-weight: bold;
+      color: black;
+    }
+  </style>
 </head>
-
 <body>
-	<section id="container">
+
+  <h1>Voice Pitch Detectioin</h1>
+  <h6>by: Robert Martin</h6>
+
+  <p>To determine the pitch frequency of your voice, press the start button and say:<br>
+    <strong>"Hello my name is [your name]"</strong>
+  </p>
+
+  <button id="startBtn">Start Recording</button>
+  <button id="stopBtn" disabled>Stop Recording</button>
+
+  <div id="status"></div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 
-		<h1>This is our cat missy</h1>
-		<img src="imgs/kitty_1.jpg">
-
-		<button>Get next photo.</button>
-		<p>She is a Maine - Coon.</p>
-
-	</section>
-	<script src="app.js"></script>
 </body>
-
 </html>
