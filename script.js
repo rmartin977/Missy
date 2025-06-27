@@ -56,7 +56,7 @@ startBtn.onclick = async () => {
     const formData = new FormData();
     formData.append('file', audioBlob, 'audio.webm');
 
-    fetch('https://voice-backend-py8p.onrender.com', {
+    fetch('https://voice-backend-py8p.onrender.com/upload', {
       method: 'POST',
       body: formData
     })
