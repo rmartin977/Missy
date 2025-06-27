@@ -12,7 +12,8 @@ startBtn.onclick = async () => {
 
   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
-  mediaRecorder = new MediaRecorder(stream);
+  mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
+
   audioChunks = [];
 
   mediaRecorder.ondataavailable = event => {
@@ -35,7 +36,9 @@ startBtn.onclick = async () => {
       audioElem.style.margin = "20px auto";
       document.body.appendChild(audioElem);
     }
-    audioElem.src = audioURL;
+  audioElem.src = audioURL;
+  audioElem.load();  // Ensures playback works properly on iOS
+
 
     // Add label under the audio player
     let label = document.getElementById("audioLabel");
