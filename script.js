@@ -1,4 +1,6 @@
 let mediaRecorder;
+let currentStream;
+
 let audioChunks = [];
 let recordTimeout;
 
@@ -10,9 +12,9 @@ startBtn.onclick = async () => {
   // Remove old audio players and label
   document.querySelectorAll("audio, #audioLabel").forEach(el => el.remove());
 
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  currentStream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
-  mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
+  mediaRecorder = new MediaRecorder(currentStream, { mimeType: 'audio/webm' });
 
   audioChunks = [];
 
@@ -25,6 +27,13 @@ startBtn.onclick = async () => {
   mediaRecorder.onstop = () => {
     const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
     const audioURL = URL.createObjectURL(audioBlob);
+
+    // Stop all tracks from the stream (releases microphone on iOS)
+    if (currentStream) {
+      currentStream.getTracks().forEach(track => track.stop());
+      currentStream = null;
+    }
+
 
     // Create or update audio player
     let audioElem = document.getElementById("audioPlayer");
@@ -54,6 +63,12 @@ startBtn.onclick = async () => {
     }
 
     status.textContent = "Recording complete! Sending audio to server...";
+
+
+    if (audioBlob.size < 1000) {
+      status.textContent = "Recording too short or failed. Please try again.";
+      return;
+}
 
     // Send the audioBlob to the backend
     const formData = new FormData();
